@@ -15,7 +15,7 @@ type DrawableTileGeneration = Array<{
   type: P2TileType;
 }>;
 
-const LINE_WIDTH = 12;
+const LINE_WIDTH = 4;
 
 export function load(
   state: ModuleState,
@@ -34,6 +34,7 @@ export function load(
       this.surface = new CanvasSurface(container, wallGeometry);
       this.ctx = (this.surface as CanvasSurface).context;
       this.ctx.lineWidth = LINE_WIDTH;
+      this.ctx.lineJoin = "bevel";
 
       this.tilesState = state.define("tiles", {
         currentGeneration: CurrentValueInterpolator,
