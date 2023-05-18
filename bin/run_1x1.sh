@@ -40,9 +40,14 @@ readonly STATUS_PID="$!"
 
 # Figure out the Chrome path (if not set)
 if [ -z "$CHROME" ]; then
-  (uname -a | grep "Darwin" > /dev/null) \
-  && readonly CHROME="/Applications/Google Chrome.app/Contents/MacOS/Google Chrome" \
-  || readonly CHROME="google-chrome"
+  case $(uname) in
+  Darwin)
+    CHROME="/Applications/Google Chrome.app/Contents/MacOS/Google Chrome"
+    ;;
+  *)
+    CHROME=google-chrome
+    ;;
+  esac
 fi
 
 # Boot two chromes:
